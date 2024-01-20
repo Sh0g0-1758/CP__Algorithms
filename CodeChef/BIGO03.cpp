@@ -8,6 +8,7 @@ struct matrix
 {
     ll mat[4][4];
     matrix friend operator*(const matrix &a, const matrix &b)
+    
     {
         matrix c;
         for (ll i = 0; i < 4; i++)
