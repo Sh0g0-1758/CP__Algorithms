@@ -1,3 +1,5 @@
+// All complex things are inherently simple. If you can't explain something simply, you just don't understand it well enough.
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
