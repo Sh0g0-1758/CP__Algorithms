@@ -20,7 +20,7 @@ const double PI=acos(-1);
 #else
 #define debug(x)
 #endif
- 
+
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -47,6 +47,42 @@ int main()
     cin >> t;
     while (t--)
     {
+        ll n,m,k;
+        cin >> n >> m >> k;
+        vector<ll> problems(n);
+        vector<ll> models(m);
+        vector<ll> functions(k);
+        for(ll i=0;i<n;i++)
+            cin >> problems[i];
+        for(ll i=0;i<m;i++)
+            cin >> models[i];
+        for(ll i=0;i<k;i++)
+            cin >> functions[i];
+        sort(models.begin(), models.end());
+        sort(functions.begin(), functions.end());
+        ll ind;
+        ll ans = INT_MIN;
+        for(ll i = 1; i < n;i++) {
+            if(problems[i] - problems[i-1] > ans) {
+                ans = problems[i] - problems[i-1];
+                ind = i;
+            }
+        }
+        ll tgt = (problems[ind] + problems[ind-1]) / 2;
+        debug(tgt)
+        for(ll i = 0; i < m;i++) {
+            ll p = upper_bound(functions.begin(), functions.end(), tgt - models[i]) - functions.begin();
+            ll sum1 = -1,sum2 = -1;
+            if(p != k) sum1 = functions[p] + models[i];
+            if(p != 0) sum2 = functions[p-1] + models[i];
+            if(sum1 != -1) ans = min(ans, max(abs(sum1 - problems[ind]), abs(sum1 - problems[ind-1])));
+            if(sum2 != -1) ans = min(ans, max(abs(sum2 - problems[ind]), abs(sum2 - problems[ind-1])));
+        }
+        for(ll i = 1; i < n;i++) {
+            if(i == ind) continue;
+            ans = max(ans, problems[i] - problems[i-1]);
+        }
+        cout << ans << endl;
     }
     return 0;
 }

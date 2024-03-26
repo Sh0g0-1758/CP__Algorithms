@@ -12,8 +12,6 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
-using cd = complex<double>;
-const double PI=acos(-1);
 
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
@@ -47,6 +45,40 @@ int main()
     cin >> t;
     while (t--)
     {
+        ll n,m,k,d;
+        cin>>n>>m>>k>>d;
+        vector<vector<ll>> river(n,vector<ll>(m,0));
+        for(ll i = 0; i < n; i++)
+        {
+            for(ll j = 0; j < m; j++)
+            {
+                cin>>river[i][j];
+            }
+        }
+        vector<ll> ans;
+        for(ll i = 0;i < n;i++) {
+            vector<ll> dp(m,0);
+            multiset<ll> mst = {1};
+            dp[0] = 1;
+            for(ll j = 1; j < m - 1;j++) {
+                dp[j] = *mst.begin() + river[i][j] + 1;
+                if (j - d - 1 >= 0) mst.erase(mst.find(dp[j - d - 1]));
+                mst.insert(dp[j]);
+                debug(dp[j])
+            }
+            ans.push_back(*mst.begin() + 1);
+        }
+        debug(ans)
+        long long cur = 0;
+        for (ll i = 0; i < k; i++)
+            cur += ans[i];
+        long long mn = cur;
+
+        for (int i = k; i < n; i++) {
+            cur += ans[i] - ans[i - k];
+            mn = min(cur, mn);
+        }
+        cout << mn << endl;
     }
     return 0;
 }
