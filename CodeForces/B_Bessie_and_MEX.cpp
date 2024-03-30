@@ -34,8 +34,7 @@ template <class T> void _print(vector <T> v);
 template <class T> void _print(set <T> v);
 template <class T, class V> void _print(map <T, V> v);
 template <class T> void _print(multiset <T> v);
-
-template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
+template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.ff); cerr << ","; _print(p.ss); cerr << "}";}
 template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
@@ -49,34 +48,40 @@ int main()
     while (t--)
     {
         ll n;
-        string s1,s2;
-        cin >> n >> s1 >> s2;
-        ll result = INT_MAX;
-        string ans = s1.substr(0,1) + s2.substr(0,n);
-        debug(ans)
-        string tmpans = ans;
-        for(ll i = 1;i < n;i++) {
-            string temp = s1.substr(0,i+1) + s2.substr(i,n-i);
-            debug(temp)
-            if(temp[i] < ans[i]) {
-                bool flag = true;
-                for(int j = 0; j < i;j++) {
-                    if(temp[j] > ans[j]) {
-                        flag = false;
+        cin >> n;
+        vector<ll> store;
+        for(ll i = 0;i < n;i++) {
+            ll x;
+            cin >> x;
+            store.push_back(x);
+        }
+        ll elem = 0;
+        vector<ll> ans;
+        for(int i = 0; i < n;i++) {
+            if(store[i] == 1) {
+                ans.push_back(elem);
+                elem++;
+            } else if(store[i] < 1) {
+                ans.push_back(elem - store[i]);
+            } else {
+                ans.push_back(elem);
+                vector<ll> temp = ans;
+                sort(temp.begin(),temp.end());
+                for(ll j = 0; j < temp.size();j++) {
+                    if(j != temp[j]) {
+                        elem = j;
+                        break;
+                    }
+                    if(j == temp.size()-1) {
+                        elem = j + 1;
                     }
                 }
-                if(flag) ans = temp;
             }
         }
-        ll cnt = 0;
-        for(ll i = 0;i < n;i++) {
-            string temp = s1.substr(0,i+1) + s2.substr(i,n-i);
-            if(temp == ans) {
-                cnt++;
-            }
+        for(auto it : ans) {
+            cout << it << " ";
         }
-        cout << ans << endl;
-        cout << cnt << endl;
+        cout << endl;
     }
     return 0;
 }
