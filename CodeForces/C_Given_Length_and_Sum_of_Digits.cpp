@@ -12,7 +12,6 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
-#define set_bits __builtin_popcountll
 using cd = complex<double>;
 const double PI=acos(-1);
 
@@ -44,34 +43,43 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 int main()
 {
     fastio();
-    ll t;
-    cin >> t;
-    while (t--)
-    {
-        ll a,b,c;
-        cin >> a >> b >> c;
-        if(c-a == 1) {
-            if(a == 0) {
-                cout << b << endl;
-            } else {
-                ll x=a;
-                ll h=0;
-                while(x){
-                    x/=2;
-                    h++;
-                }
-                ll y=(ll)(pow(2,h))-a-1;
-                if(b<=y)cout<<h<<endl;
-                else{
-                    b-=y;
-                    h+=b/(a+1);
-                    if(b%(a+1))h++;
-                    cout<<h<<endl;
+    // ll t;
+    // cin >> t;
+    // while (t--)
+    // {
+    ll a,b;
+    cin>>a>>b;
+    vector<ll> ans;
+    while(b>9) {
+        ans.push_back(9);
+        b-=9;
+    }
+    ans.push_back(b);
+    for(ll i = ans.size(); i < a;i++) {
+        ans.push_back(0);
+    }
+    if((ans[0] == 0 and a != 1) or ans.size() > a) {
+        cout << -1 << " " << -1;
+    } else {
+        vector<ll> temp = ans;
+        reverse(ans.begin(), ans.end());
+        if (ans[0] == 0) {
+            for (ll i = 0; i < ans.size(); i++) {
+                if(ans[i] != 0) {
+                    ans[i]--;
+                    ans[0]++;
+                    break;
                 }
             }
-        } else {
-            cout << -1 << endl;
+        }
+        for(auto it : ans) {
+            cout << it;
+        }
+        cout << " ";
+        for(auto it : temp) {
+            cout << it;
         }
     }
+    // }
     return 0;
 }

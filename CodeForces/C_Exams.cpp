@@ -12,7 +12,6 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
-#define set_bits __builtin_popcountll
 using cd = complex<double>;
 const double PI=acos(-1);
 
@@ -44,34 +43,28 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 int main()
 {
     fastio();
-    ll t;
-    cin >> t;
-    while (t--)
-    {
-        ll a,b,c;
-        cin >> a >> b >> c;
-        if(c-a == 1) {
-            if(a == 0) {
-                cout << b << endl;
-            } else {
-                ll x=a;
-                ll h=0;
-                while(x){
-                    x/=2;
-                    h++;
-                }
-                ll y=(ll)(pow(2,h))-a-1;
-                if(b<=y)cout<<h<<endl;
-                else{
-                    b-=y;
-                    h+=b/(a+1);
-                    if(b%(a+1))h++;
-                    cout<<h<<endl;
-                }
-            }
-        } else {
-            cout << -1 << endl;
+    // ll t;
+    // cin >> t;
+    // while (t--)
+    // {
+        ll n;
+        cin >> n;
+        vector<pair<ll,ll>> a;
+        for(ll i = 0; i < n;i++) {
+            ll x,y;
+            cin >> x >> y;
+            a.push_back({x,y});
         }
-    }
+        sort(a.begin(),a.end());
+        ll ans = 0;
+        for(ll i = 0;i < a.size();i++) {
+            if (min(a[i].first,a[i].second) >= ans) {
+                ans = min(a[i].first,a[i].second);
+            } else {
+                ans = max(a[i].first,a[i].second);
+            }
+        }
+        cout << ans << endl;
+    // }
     return 0;
 }

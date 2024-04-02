@@ -12,7 +12,6 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
-#define set_bits __builtin_popcountll
 using cd = complex<double>;
 const double PI=acos(-1);
 
@@ -44,34 +43,56 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 int main()
 {
     fastio();
-    ll t;
-    cin >> t;
-    while (t--)
-    {
-        ll a,b,c;
-        cin >> a >> b >> c;
-        if(c-a == 1) {
-            if(a == 0) {
-                cout << b << endl;
-            } else {
-                ll x=a;
-                ll h=0;
-                while(x){
-                    x/=2;
-                    h++;
-                }
-                ll y=(ll)(pow(2,h))-a-1;
-                if(b<=y)cout<<h<<endl;
-                else{
-                    b-=y;
-                    h+=b/(a+1);
-                    if(b%(a+1))h++;
-                    cout<<h<<endl;
-                }
-            }
-        } else {
+    // ll t;
+    // cin >> t;
+    // while (t--)
+    // {
+        ll a,b;
+        cin >> a >> b;
+        if (a > b + 1 or b > (2 * (a + 1))) {
             cout << -1 << endl;
+        } else if (a == b) {
+            for(ll i = 0; i < a;i++) {
+                cout << "01";
+            }
+            cout << endl;
+        } else if (a == (b + 1)){
+            for(ll i = 0; i < b;i++) {
+                cout << "01";
+            }
+            cout << "0";
+            cout << endl;
+        } else if (b == (a + 1)) {
+            for(ll i = 0; i < a;i++) {
+                cout << "10";
+            }
+            cout << "1";
+            cout << endl;
+        } else if (b == 2 * a) {
+            for(ll i = 0;i < a;i++) {
+                cout << "110";
+            }
+            cout << endl;
+        } else if (b - 1 == 2 * a or b - 2 == 2 * a) {
+            for(ll i = 0; i < a;i++) {
+                cout << "110";
+            }
+            for(ll i = 0; i < b - 2 * a;i++) {
+                cout << "1";
+            }
+            cout << endl;
+        } else if (b > a) {
+            while(b > a) {
+                a-=1;
+                b-=2;
+                cout << "110";
+            }
+            for(ll i = 0; i < a;i++) {
+                cout << "10";
+            }
+            cout << endl;
         }
-    }
+
+    // } 
     return 0;
 }

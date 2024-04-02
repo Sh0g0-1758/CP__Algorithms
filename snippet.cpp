@@ -12,6 +12,7 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
+#define setbits(x) __builtin_popcountll(x)
 using cd = complex<double>;
 const double PI=acos(-1);
 

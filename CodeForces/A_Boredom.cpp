@@ -12,7 +12,7 @@ typedef long double lld;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define MOD 1000000007
 #define INF 1e18
-#define set_bits __builtin_popcountll
+#define setbits(x) __builtin_popcountll(x)
 using cd = complex<double>;
 const double PI=acos(-1);
 
@@ -44,34 +44,29 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 int main()
 {
     fastio();
-    ll t;
-    cin >> t;
-    while (t--)
+    // ll t;
+    // cin >> t;
+    // while (t--)
+    // {
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for(ll i=0;i<n;i++)
     {
-        ll a,b,c;
-        cin >> a >> b >> c;
-        if(c-a == 1) {
-            if(a == 0) {
-                cout << b << endl;
-            } else {
-                ll x=a;
-                ll h=0;
-                while(x){
-                    x/=2;
-                    h++;
-                }
-                ll y=(ll)(pow(2,h))-a-1;
-                if(b<=y)cout<<h<<endl;
-                else{
-                    b-=y;
-                    h+=b/(a+1);
-                    if(b%(a+1))h++;
-                    cout<<h<<endl;
-                }
-            }
-        } else {
-            cout << -1 << endl;
-        }
+        cin >> a[i];
     }
+    ll freq_size = *max_element(a.begin(),a.end());
+    vector<ll> freq(freq_size+1,0);
+    for(auto it : a)
+    {
+        freq[it]++;
+    }
+    vector<ll> res(freq_size+1,0);
+    res[1] = freq[1];
+    for(ll i = 2;i <= freq_size;i++) {
+        res[i] = max(res[i-1], res[i - 2] + i * freq[i]);
+    }
+    cout << res[freq_size] << endl;
+    // }
     return 0;
 }
