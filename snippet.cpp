@@ -44,7 +44,7 @@ template <class T> void _print(deque <T> v) {cerr << "[ "; for (T i : v) {_print
 int main()
 {
     fastio();
-    ll t;
+    ll t = 1;
     cin >> t;
     while (t--)
     {
