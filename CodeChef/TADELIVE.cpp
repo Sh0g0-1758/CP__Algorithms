@@ -41,61 +41,54 @@ template <class T> void _print(queue <T> v) {cerr << "[ "; while (!v.empty()) {_
 template <class T> void _print(priority_queue <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.top()); cerr << " "; v.pop();} cerr << "]";}
 template <class T> void _print(deque <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 
-class DSU
+bool custom_sort(pair<ll,ll> a,pair<ll,ll> b)
 {
-    int *parent;
-    int *rank;
-
-public:
-    DSU(int n)
-    {
-        parent = new int[n];
-        rank = new int[n];
-
-        for (int i = 0; i < n; i++)
-        {
-            parent[i] = -1;
-            rank[i] = 1;
-        }
-    }
-    int find(int i)
-    {
-        if (parent[i] == -1)
-            return i;
-
-        return parent[i] = find(parent[i]);
-    }
-    void unite(int x, int y)
-    {
-        int s1 = find(x);
-        int s2 = find(y);
-
-        if (s1 != s2)
-        {
-            if (rank[s1] < rank[s2])
-            {
-                parent[s1] = s2;
-            }
-            else if (rank[s1] > rank[s2])
-            {
-                parent[s2] = s1;
-            }
-            else
-            {
-                parent[s2] = s1;
-                rank[s1] += 1;
-            }
-        }
-    }
-};
+    return max(a.first,a.second) > (b.first,b.second);
+}
 
 int main()
 {
     fastio();
     ll t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
+        ll n,m1,m2;
+        cin >> n >> m1 >> m2;
+        vector<pair<ll,ll>> a(n);
+        for(ll i=0;i<n;i++)
+        {
+            cin >> a[i].first;
+        }
+        for(ll i=0;i<n;i++)
+        {
+            cin >> a[i].second;
+        }
+        sort(a.begin(),a.end(),custom_sort);
+        reverse(a.begin(),a.end());
+        ll index = 0;
+        ll ans = 0;
+        while(m1 > 0 and m2 > 0 and index < n) {
+            if(a[index].first >= a[index].second) {
+                ans += a[index].first;
+                m1--;
+            } else {
+                ans += a[index].second;
+                m2--;
+            }
+            index++;
+        }
+        while(m1 > 0 and index < n) {
+            ans += a[index].first;
+            m1--;
+            index++;
+        }
+        while(m2 > 0 and index < n) {
+            ans += a[index].second;
+            m2--;
+            index++;
+        }
+        cout << ans << endl;
     }
     return 0;
 }

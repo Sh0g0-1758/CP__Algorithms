@@ -96,6 +96,27 @@ int main()
     cin >> t;
     while (t--)
     {
+        ll n;cin>>n;
+        vector<ll>a(n);
+        for(ll i=0;i<n;i++){cin>>a[i];}
+        vector<ll>diff(n,-1);
+        for(ll i=1;i<n;i++){
+            diff[i] = diff[i-1];
+            if(a[i] != a[i-1]){
+                diff[i]=i-1;
+            }
+        }
+        debug(diff);
+        ll m;cin>>m;
+        for(ll i=0;i<m;i++){
+            ll x,y;
+            cin>>x>>y;
+            x--;y--;
+            if(diff[y]<x){cout << -1 << " " << -1 << endl;}
+            else{cout << diff[y]+1 << " " << y+1 << endl;}
+        }
+        if(t != 0)
+        cout<<endl;
     }
     return 0;
 }

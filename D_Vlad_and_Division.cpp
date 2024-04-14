@@ -96,6 +96,15 @@ int main()
     cin >> t;
     while (t--)
     {
+        ll n;cin>>n;
+        map<ll,ll> cnt;
+        ll sum = 0;
+        for(ll i = 0; i < n;i++) {
+            ll x;cin>>x;
+            if(!cnt[x]) sum++,cnt[((1 << 31) - 1) ^ x]++;
+            else cnt[x]--;
+        }
+        cout<<sum<<endl;
     }
     return 0;
 }
