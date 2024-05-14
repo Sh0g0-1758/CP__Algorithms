@@ -48,6 +48,32 @@ int main()
     cin >> t;
     while (t--)
     {
+        ll n;
+        cin>>n;
+        vector<ll> a(n);
+        for(ll i=0;i<n;i++)
+            cin>>a[i];
+        sort(a.begin(),a.end());
+        ll max_elem = a[n-1];
+        ll mex = 1;
+        for(ll i=0;i<n;i++)
+        {
+            if(a[i] == mex)
+                mex++;
+        }
+        if(mex > max_elem) {
+            if(max_elem%2 == 1) {
+                cout << "Alice" << endl;
+            } else {
+                cout << "Bob" << endl;
+            }
+        } else {
+            if(mex % 2 == 1) {
+                cout << "Alice" << endl;
+            } else {
+                cout << "Bob" << endl;
+            }
+        }
     }
     return 0;
 }
