@@ -41,16 +41,6 @@ template <class T> void _print(queue <T> v) {cerr << "[ "; while (!v.empty()) {_
 template <class T> void _print(priority_queue <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.top()); cerr << " "; v.pop();} cerr << "]";}
 template <class T> void _print(deque <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 
-
-bool is_ans(vector<ll> &a, vector<ll> &b) {
-    ll ans = 0;
-    for(ll i=0;i<3;i++) {
-        if(a[i] == b[i]) ans++;
-    }
-    if(ans == 2) return true;
-    return false;
-}
-
 int main()
 {
     fastio();
@@ -58,27 +48,24 @@ int main()
     cin >> t;
     while (t--)
     {
-        ll n;
-        cin>>n;
-        vector<ll> a(n);
+        ll n;cin>>n;
+        vector<ll>a(n);
         for(auto &i:a) cin>>i;
-        map<ll,vector<ll>> mp;
-        vector<ll> b;
-        for(ll i = 0; i < n;i++) {
-            mp[a[i]].push_back(i);
-            b.push_back(mp[a[i]].size()-1);
-        }
-        for(ll i = 0; i < n-2;i++) {
-            ll elem1 = a[i];
-            ll elem2 = a[i+1];
-            ll elem3 = a[i+2];
-            vector<ll> temp1 = mp[elem1];
-            vector<ll> temp2 = mp[elem2];
-            vector<ll> temp3 = mp[elem3];
-            for(ll j = b[i]; j < temp1.size();j++) {
-                ll elem4 = temp1[j];
+        map<pair<ll,pair<ll,ll>>,ll> mp;
+        ll ans=0;
+        for(ll i=0;i<n-2;i++){
+            pair<ll,pair<ll,ll>> triplet = {a[i],{a[i+1],a[i+2]}};
+            vector<pair<ll,pair<ll,ll>>> temp;
+            temp.push_back({0,{a[i+1],a[i+2]}});
+            temp.push_back({a[i],{0,a[i+2]}});
+            temp.push_back({a[i],{a[i+1],0}});
+            for(auto x:temp){
+                ans+=mp[x]-mp[triplet];
+                mp[x]+=1;
             }
+            mp[triplet]+=1;
         }
+        cout<<ans<<endl;
     }
     return 0;
 }

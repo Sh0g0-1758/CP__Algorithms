@@ -5,3 +5,12 @@ This Repository is a documentation of my Competetive Programming journey and wil
 # MileStones
 
 21st May 2024 -> Became Pupil
+
+# Resources
+
+## DP
+
+1. https://cses.fi/problemset/
+2. https://atcoder.jp/contests/dp
+3. https://usaco.guide/gold/intro-dp?lang=cpp
+4. https://a2oj.netlify.app/dynamic%20programming
