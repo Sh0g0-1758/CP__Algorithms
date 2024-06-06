@@ -26,3 +26,8 @@ This Repository is a documentation of my Competetive Programming journey and wil
 ## Roadmaps
 
 1. https://neetcode.io/roadmap
+
+# Good Problems
+
+1. https://codeforces.com/contest/1981/problem/C
+2. https://codeforces.com/contest/1981/problem/D

@@ -4,7 +4,7 @@
 
 // ##################################
 // ##  author: __Legacy__          ##
-// ##  date: 06-06-2024 17:43:13   ##
+// ##  date: 06-06-2024 17:19:27   ##
 // ##################################
 
 
@@ -53,20 +53,34 @@ template <class T> void _print(queue <T> v) {cerr << "[ "; while (!v.empty()) {_
 template <class T> void _print(priority_queue <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.top()); cerr << " "; v.pop();} cerr << "]";}
 template <class T> void _print(deque <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
 
+void dfs(ll i,ll j,vector<vector<char>> &graph,vector<vector<bool>> &vis,ll n,ll m) {
+    if(i < 0 or j < 0 or i >= n or j >= m or graph[i][j] == '#' or vis[i][j] == true)
+        return;
+    vis[i][j] = true;
+    dfs(i+1,j,graph,vis,n,m);
+    dfs(i-1,j,graph,vis,n,m);
+    dfs(i,j+1,graph,vis,n,m);
+    dfs(i,j-1,graph,vis,n,m);
+}
 
 int main()
 {
     fastio();
     ll t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--)
     {
-        ll x,n;cin>>x>>n;
-        ll ans = 1;
-        for(ll i = 1; i*i <= x;i++) {
-            if(x%i == 0) {
-                if(n <= (x/i)) ans = max(ans,i);
-                if(n <= i) ans = max(ans,x/i);
+        ll n,m;cin>>n>>m;
+        ll ans = 0;
+        vector<vector<char>> graph(n,vector<char>(m));
+        vector<vector<bool>> vis(n,vector<bool>(m,false));
+        for(ll i=0;i<n;i++) for(ll j=0;j<m;j++) cin>>graph[i][j];
+        for(ll i=0;i<n;i++) {
+            for(ll j=0;j<m;j++) {
+                if(graph[i][j] == '.' and vis[i][j] == false) {
+                    dfs(i,j,graph,vis,n,m);
+                    ans++;
+                }
             }
         }
         cout<<ans<<endl;

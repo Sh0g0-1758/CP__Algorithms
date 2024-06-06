@@ -4,7 +4,7 @@
 
 // ##################################
 // ##  author: __Legacy__          ##
-// ##  date: 06-06-2024 17:43:13   ##
+// ##  date: 06-06-2024 13:34:05   ##
 // ##################################
 
 
@@ -61,12 +61,13 @@ int main()
     cin >> t;
     while (t--)
     {
-        ll x,n;cin>>x>>n;
-        ll ans = 1;
-        for(ll i = 1; i*i <= x;i++) {
-            if(x%i == 0) {
-                if(n <= (x/i)) ans = max(ans,i);
-                if(n <= i) ans = max(ans,x/i);
+        ll n,m;cin>>n>>m;
+        ll high = n + m;
+        ll low = max((ll)0,n-m);
+        ll ans = 0;
+        for(int i = 31;~i;i--) {
+            if ((low & (1ll << i)) or (high & (1ll << i)) or (low >> (i + 1)) != (high >> (i + 1))) {
+                ans |= 1ll << i;
             }
         }
         cout<<ans<<endl;

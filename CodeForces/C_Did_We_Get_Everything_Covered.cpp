@@ -1,113 +1,94 @@
+// All complex things are inherently simple. If you can't explain something simply,
+// you just don't understand it well enough.
+
+
+// ##################################
+// ##  author: __Legacy__          ##
+// ##  date: 06-06-2024 18:00:16   ##
+// ##################################
+
+
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
+
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double lld;
+
+
 #define endl "\n"
+#define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define MOD 1000000007
+#define INF 1e18
+#define setbits(x) __builtin_popcountll(x)
+using cd = complex<double>;
+const double PI=acos(-1);
+
+
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
+
+
+void _print(ll t) {cerr << t;}
+void _print(int t) {cerr << t;}
+void _print(string t) {cerr << t;}
+void _print(char t) {cerr << t;}
+void _print(lld t) {cerr << t;}
+void _print(double t) {cerr << t;}
+void _print(ull t) {cerr << t;}
+
+
+template <class T, class V> void _print(pair <T, V> p) {cerr << "{"; _print(p.first); cerr << ","; _print(p.second); cerr << "}";}
+template <class T> void _print(vector <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(set <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T, class V> void _print(unordered_map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
+template <class T> void _print(stack <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.top()); cerr << " "; v.pop();} cerr << "]";}
+template <class T> void _print(queue <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.front()); cerr << " "; v.pop();} cerr << "]";}
+template <class T> void _print(priority_queue <T> v) {cerr << "[ "; while (!v.empty()) {_print(v.top()); cerr << " "; v.pop();} cerr << "]";}
+template <class T> void _print(deque <T> v) {cerr << "[ "; for (T i : v) {_print(i); cerr << " ";} cerr << "]";}
+
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    ll t;
+    fastio();
+    ll t = 1;
     cin >> t;
     while (t--)
     {
-        ll n, k, m;
-        cin >> n >> k >> m;
-        string s;
-        cin >> s;
-        vector<ll> v(k);
-        for (int i = 0; i < m; i++)
-        {
-            v[s[i] - 97]++;
-        }
-        bool flag = true;
-        ll pos = 0;
-        for (int i = 0; i < k; i++)
-        {
-            if (v[i] < n)
-            {
-                flag = false;
-                pos = i;
-                break;
+        ll n,k,m;cin>>n>>k>>m;
+        string s;cin>>s;
+        vector<bool> vis(k,false);
+        string res = "";
+        ll cnt=0;
+        for(auto c : s) {
+            if(res.size() == n) break;
+            if (!vis[c-'a']) {
+                vis[c-'a'] = true;
+                cnt++;
+            }
+            if(cnt == k) {
+                vis = vector<bool>(k,false);
+                res+=c;
+                cnt=0;
             }
         }
-        if (flag)
-        {
-            vector<ll> v_another(k);
-            ll count = 0;
-            ll iter = 0;
-            ll checkpoint = 0;
-            for (int i = 0; i < m; i++)
-            {
-                while (accumulate(v_another.begin(), v_another.end(), 0) != (count + 1) * k)
-                {
-                    if (v_another[s[i] - 97] == count && iter == (s[i] - 97))
-                    {
-                        v_another[s[i] - 97]++;
-                        iter++;
-                    }
-                    i++;
-                    if (i >= m)
-                    {
-                        break;
-                    }
-                }
-                iter = 0;
-                if (i >= m)
-                {
+        if(res.size() == n) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"NO"<<endl;
+            for(ll i = 0; i < k;i++) {
+                if(!vis[i]) {
+                    while(res.size() < n) res += char(i+'a');
                     break;
                 }
-                count++;
-                checkpoint = i;
             }
-            vector<ll> v_yet_another(k);
-            for (int i = checkpoint; i < m; i++)
-            {
-                if (v_yet_another[s[i] - 97] == 0)
-                {
-                    v_yet_another[s[i] - 97]++;
-                }
-            }
-            bool flag = false;
-            if (accumulate(v_yet_another.begin(), v_yet_another.end(), 0) == k)
-            {
-                flag = true;
-            }
-            if (count == n || (flag && count == n - 1))
-            {
-                cout << "YES" << endl;
-            }
-            else
-            {
-                cout << "NO" << endl;
-                string ans = "";
-                if (count == 0)
-                {
-                    for (int i = 0; i < k; i++)
-                    {
-                        ans = ans + (char)(i + 97);
-                    }
-                }
-                else
-                {
-                    ans = ans += char(k - 1 + 97);
-                    for (int i = k - 2; i >= 0; i--)
-                    {
-                        ans = ans + (char)(97);
-                    }
-                }
-                cout << ans << endl;
-            }
-        }
-        else
-        {
-            cout << "NO " << endl;
-            string ans = "";
-            for (int i = 0; i < n; i++)
-            {
-                ans += (pos + 97);
-            }
-            cout << ans << endl;
+            cout<<res<<endl;
         }
     }
     return 0;
