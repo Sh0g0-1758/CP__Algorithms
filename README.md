@@ -15,6 +15,7 @@ This Repository is a documentation of my Competetive Programming journey and wil
 ## Problemsets
 
 1. https://cses.fi/problemset/
+2. https://leetcode.com/problem-list/m7zedj6c/
 
 ## DP
 
@@ -26,6 +27,27 @@ This Repository is a documentation of my Competetive Programming journey and wil
 ## Roadmaps
 
 1. https://neetcode.io/roadmap
+
+## Cpp Internals
+
+1. https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb
+
+## General Resource Bank
+
+1. https://docs.google.com/document/d/1OuGJWTyHO0YDnBwGXNdSJuEnY2QJKGM1gTT_nKJoBjQ/edit
+
+General Guide, good to follow : 
+
+```
+CF, CC, AtCoder
+Leetcode(Hard), interview bit
+
+Graphs, DP
+
+CS - GFG, studytonight
+
+Maths - Interstellar, 50 challenging problems in prob
+```
 
 # Good Problems
 
