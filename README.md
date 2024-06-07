@@ -15,7 +15,7 @@ This Repository is a documentation of my Competetive Programming journey and wil
 ## Problemsets
 
 1. https://cses.fi/problemset/
-2. https://leetcode.com/problem-list/m7zedj6c/
+2. https://leetcode.com/problem-list/m71z927s/
 
 ## DP
 
