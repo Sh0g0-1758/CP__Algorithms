@@ -8,6 +8,10 @@ This Repository is a documentation of my Competetive Programming journey and wil
 
 # Resources
 
+# Everything Everywhere All At Once
+
+1. https://codeforces.com/blog/entry/57282
+
 ## Contest Trackers
 
 1. https://cftracker.netlify.app/contests
@@ -16,6 +20,7 @@ This Repository is a documentation of my Competetive Programming journey and wil
 
 1. https://cses.fi/problemset/
 2. https://leetcode.com/problem-list/mlwbf003/
+3. https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2
 
 ## DP
 
@@ -23,6 +28,7 @@ This Repository is a documentation of my Competetive Programming journey and wil
 2. https://atcoder.jp/contests/dp
 3. https://usaco.guide/gold/intro-dp?lang=cpp
 4. https://a2oj.netlify.app/dynamic%20programming
+5. https://codeforces.com/blog/entry/325
 
 ## Roadmaps
 
